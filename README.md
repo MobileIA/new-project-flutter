@@ -1,6 +1,11 @@
 # Nuevo proyecto en Flutter
 Pasos para la creación de un proyecto en Flutter.
 
+* Activar commands:
+```bash
+source $HOME/.bash_profile
+```
+
 1. Crear proyecto
 ```bash
 flutter create name_project
