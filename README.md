@@ -16,9 +16,38 @@ open -a Simulator
 ```
 3. Agregar paquetes, abrir archivo: "pubspec.yaml" y debajo de dependencies agregar:
 ```yaml
+flutter_clean_architecture: ^3.0.2
 transparent_image:
 cached_network_image:
 http:
+```
+
+# Estructura de carpetas:
+```folders
+screens/
+tabs/
+widgets/
+utils/
+```
+
+# Como Crear una pantalla/Screen:
+1. Crear archivo carpeta: 'screens/name_screen'
+2. Crear archivo Controller: 'screens/name_screen/name.controller.dart'
+```dart
+import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
+
+class NameController extends Controller {
+  
+  @override
+  void initListeners() {
+    // TODO: implement initListeners
+  }
+
+}
+```
+3. Crear archivo View: 'screens/name_screen/name.view.dart'
+```dart
+
 ```
 
 # Como enviar información de un Screen a otro:
@@ -42,6 +71,21 @@ Navigator.push(
         builder: (context) => CenterDetailScreen(commerce: commerce),
     ),
 );
+```
+
+# Utilizando Chooper (HTTP)
+1. Incluir libreria:
+```dart
+dependencies:
+  chopper: ^3.0.2
+
+dev_dependencies:
+  build_runner:
+  chopper_generator: ^3.0.4
+```
+2. Ejecutar builder:
+```bash
+flutter packages pub run build_runner watch
 ```
 
 # Otras Librerias:
