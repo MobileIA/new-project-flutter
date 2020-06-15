@@ -8,7 +8,7 @@ source $HOME/.bash_profile
 
 1. Crear proyecto
 ```bash
-flutter create name_project
+flutter create --org com.agencycoda name_project
 ```
 2. Abrir emulador de iOS:
 ```bash
