@@ -135,9 +135,6 @@ if (keystorePropertiesFile.exists()) {
 flutter build apk --release
 ```
 
-android {
-```
-
 # Otras Librerias:
 - Custom Bottom Bar Animate:
 https://pub.dev/packages/bottom_navy_bar
