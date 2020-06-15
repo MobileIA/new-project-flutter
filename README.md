@@ -88,6 +88,56 @@ dev_dependencies:
 flutter packages pub run build_runner watch
 ```
 
+# Producción: Compilar Android
+1. Crear carpeta "certificates" dentro del proyecto.
+2. Crear KeyStore
+```bash
+keytool -genkey -v -keystore key.jks -keyalg RSA -keysize 2048 -validity 10000 -alias key
+```
+3. Exportar SHA1:
+```bash
+keytool -list -v \
+-alias myalias -keystore key.jks
+```
+4. Crear archivo: "/android/key.properties"
+```txt
+storePassword=password
+keyPassword=password
+keyAlias=myalias
+storeFile=../../certificates/key.jks
+```
+5. Abrimos archivo "android/app/build.gradle" y arriba de android {
+```txt
+def keystoreProperties = new Properties()
+def keystorePropertiesFile = rootProject.file('key.properties')
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+}
+```
+6. Reemplazamos buildTyps:
+```txt
+    signingConfigs {
+        release {
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
+        }
+    }
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+        }
+    }
+```
+7. Generar APK:
+```bash
+flutter build apk --release
+```
+
+android {
+```
+
 # Otras Librerias:
 - Custom Bottom Bar Animate:
 https://pub.dev/packages/bottom_navy_bar
@@ -204,6 +254,7 @@ https://github.com/pulyaevskiy/parallax-image
 https://github.com/renancaraujo/photo_view
 https://github.com/hnvn/flutter_image_cropper
 https://github.com/Sh1d0w/multi_image_picker
+https://pub.dev/packages/expandable_bottom_bar
 
 https://github.com/Solido/awesome-flutter
 
